@@ -10,7 +10,7 @@ from sklearn.preprocessing import label_binarize
 # ===============================
 # 0. TEST KLASÖRÜ VE RUN NUMARASI
 # ===============================
-base_dir = "tests"
+base_dir = "tests/xgboost"
 os.makedirs(base_dir, exist_ok=True)
 
 # Mevcut run klasörlerini say
