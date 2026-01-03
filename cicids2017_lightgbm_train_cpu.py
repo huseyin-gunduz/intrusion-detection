@@ -28,7 +28,7 @@ print(f"Çıktılar '{run_dir}' klasörüne kaydedilecek.\n")
 # 1. VERİYİ YÜKLE
 # ===============================
 df = pd.read_csv(
-    'C:/Users/Admin/.cache/kagglehub/datasets/ericanacletoribeiro/cicids2017-cleaned-and-preprocessed/versions/6/cicids2017_cleaned.csv'
+    r'C:\Users\Admin\.cache\kagglehub\datasets\ericanacletoribeiro\cicids2017-cleaned-and-preprocessed\versions\6\cicids2017_cleaned.csv'
 )
 df.replace([np.inf, -np.inf], np.nan, inplace=True)
 df.dropna(inplace=True)
