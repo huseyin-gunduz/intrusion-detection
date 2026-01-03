@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 # ===============================
 # 0. TEST KLASÖRÜ VE RUN NUMARASI
 # ===============================
-base_dir = "tests"
+base_dir = r"tests\cicids2017\lightgbm"
 os.makedirs(base_dir, exist_ok=True)
 
 existing_runs = [d for d in os.listdir(base_dir) if d.startswith("run")]
@@ -37,9 +37,9 @@ df.dropna(inplace=True)
 # 2. ÇOK KÜÇÜK SINIFLARI KALDIR
 # ===============================
 # Her sınıfta en az 50 örnek olmalı
-#class_counts = df['Attack Type'].value_counts()
-#valid_classes = class_counts[class_counts >= 50].index
-#df = df[df['Attack Type'].isin(valid_classes)]
+# class_counts = df['Attack Type'].value_counts()
+# valid_classes = class_counts[class_counts >= 50].index
+# df = df[df['Attack Type'].isin(valid_classes)]
 
 # ===============================
 # 3. HEDEF DEĞİŞKENİ ENCODE ET
@@ -64,12 +64,11 @@ X_train, X_test, y_train, y_test = train_test_split(
 # 5. ÖLÇEKLENDİRME
 # ===============================
 scaler = StandardScaler()
-#X_train = scaler.fit_transform(X_train).astype(np.float32)
-#X_test = scaler.transform(X_test).astype(np.float32)
+# X_train = scaler.fit_transform(X_train).astype(np.float32)
+# X_test = scaler.transform(X_test).astype(np.float32)
 
 X_train = pd.DataFrame(scaler.fit_transform(X_train), columns=X.columns, index=X_train.index)
 X_test = pd.DataFrame(scaler.transform(X_test), columns=X.columns, index=X_test.index)
-
 
 y_train = y_train.astype(np.int32)
 y_test = y_test.astype(np.int32)
@@ -84,8 +83,8 @@ model = lgb.LGBMClassifier(
     learning_rate=0.1,
     max_depth=8,
     random_state=42,
-    device='cpu',           # GPU yerine CPU
-    min_child_samples=1,    # split hatasını önlemek için
+    device='cpu',  # GPU yerine CPU
+    min_child_samples=1,  # split hatasını önlemek için
     min_split_gain=0
 )
 
@@ -149,7 +148,8 @@ feature_importance = pd.Series(model.feature_importances_, index=X.columns).sort
 # ===============================
 # 10. Sonuçları kaydet
 # ===============================
-pd.DataFrame(cm, index=label_encoder.classes_, columns=label_encoder.classes_).to_csv(os.path.join(run_dir, "confusion_matrix.csv"))
+pd.DataFrame(cm, index=label_encoder.classes_, columns=label_encoder.classes_).to_csv(
+    os.path.join(run_dir, "confusion_matrix.csv"))
 clf_report_df.to_csv(os.path.join(run_dir, "classification_report.csv"))
 feature_importance.head(10).to_csv(os.path.join(run_dir, "top10_features.csv"))
 pd.DataFrame.from_dict(roc_auc_dict, orient='index', columns=["ROC AUC"]).to_csv(os.path.join(run_dir, "roc_auc.csv"))

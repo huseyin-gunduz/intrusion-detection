@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 # ===============================
 # 0. TEST KLASÖRÜ VE RUN NUMARASI
 # ===============================
-base_dir = "tests"
+base_dir = "../tests"
 os.makedirs(base_dir, exist_ok=True)
 
 existing_runs = [d for d in os.listdir(base_dir) if d.startswith("run")]

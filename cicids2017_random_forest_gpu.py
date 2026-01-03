@@ -14,7 +14,7 @@ import matplotlib.pyplot as plt
 # ===============================
 # 0. TEST KLASÖRÜ VE RUN NUMARASI
 # ===============================
-base_dir = "tests"
+base_dir = r"tests\cicids2017\random_forest"
 os.makedirs(base_dir, exist_ok=True)
 
 existing_runs = [d for d in os.listdir(base_dir) if d.startswith("run")]
@@ -28,7 +28,8 @@ print(f"Çıktılar '{run_dir}' klasörüne kaydedilecek.\n")
 # 1. VERİYİ YÜKLE
 # ===============================
 df = pd.read_csv(
-    'C:/Users/Admin/.cache/kagglehub/datasets/ericanacletoribeiro/cicids2017-cleaned-and-preprocessed/versions/6/cicids2017_cleaned.csv'
+    r'C:\Users\Admin\.cache/kagglehub\datasets\ericanacletoribeiro\cicids2017-cleaned-and-preprocessed\versions\6'
+    r'\cicids2017_cleaned.csv'
 )
 df.replace([np.inf, -np.inf], np.nan, inplace=True)
 df.dropna(inplace=True)

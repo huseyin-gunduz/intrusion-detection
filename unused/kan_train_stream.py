@@ -68,7 +68,7 @@ KAN_K = 3
 # ===============================
 # 1) Run folder
 # ===============================
-base_dir = "tests"
+base_dir = "../tests"
 os.makedirs(base_dir, exist_ok=True)
 existing_runs = [d for d in os.listdir(base_dir) if d.startswith("run")]
 run_number = len(existing_runs) + 1

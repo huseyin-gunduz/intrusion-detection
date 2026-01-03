@@ -4,13 +4,14 @@ import numpy as np
 import xgboost as xgb
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, LabelEncoder
-from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, matthews_corrcoef, roc_curve, auc, precision_recall_curve
+from sklearn.metrics import classification_report, confusion_matrix, accuracy_score, matthews_corrcoef, roc_curve, auc, \
+    precision_recall_curve
 from sklearn.preprocessing import label_binarize
 
 # ===============================
 # 0. TEST KLASÖRÜ VE RUN NUMARASI
 # ===============================
-base_dir = "tests/xgboost"
+base_dir = r"tests\cicids2017\xgboost"
 os.makedirs(base_dir, exist_ok=True)
 
 # Mevcut run klasörlerini say
@@ -25,7 +26,7 @@ print(f"Çıktılar '{run_dir}' klasörüne kaydedilecek.\n")
 # 1. VERİYİ YÜKLE
 # ===============================
 df = pd.read_csv(
-    'C:/Users/Admin/.cache/kagglehub/datasets/ericanacletoribeiro/cicids2017-cleaned-and-preprocessed/versions/6/cicids2017_cleaned.csv'
+    r'C:\Users\Admin\.cache\kagglehub\datasets\ericanacletoribeiro\cicids2017-cleaned-and-preprocessed\versions\6\cicids2017_cleaned.csv'
 )
 df.replace([np.inf, -np.inf], np.nan, inplace=True)
 df.dropna(inplace=True)
@@ -114,7 +115,8 @@ print(feature_importance.head(10))
 # ===============================
 # 9. SONUÇLARI DOSYALARA KAYDET
 # ===============================
-pd.DataFrame(cm, index=label_encoder.classes_, columns=label_encoder.classes_).to_csv(os.path.join(run_dir, "confusion_matrix.csv"))
+pd.DataFrame(cm, index=label_encoder.classes_, columns=label_encoder.classes_).to_csv(
+    os.path.join(run_dir, "confusion_matrix.csv"))
 clf_report_df.to_csv(os.path.join(run_dir, "classification_report.csv"))
 feature_importance.head(10).to_csv(os.path.join(run_dir, "top10_features.csv"))
 pd.DataFrame.from_dict(roc_auc_dict, orient='index', columns=["ROC AUC"]).to_csv(os.path.join(run_dir, "roc_auc.csv"))

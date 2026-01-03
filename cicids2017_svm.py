@@ -15,7 +15,7 @@ from sklearn.linear_model import SGDClassifier
 # ===============================
 # 0. TEST KLASÖRÜ VE RUN NUMARASI
 # ===============================
-base_dir = "tests/svm"
+base_dir = r"tests\cicids2017\svm"
 os.makedirs(base_dir, exist_ok=True)
 
 existing_runs = [d for d in os.listdir(base_dir) if d.startswith("run")]
@@ -28,7 +28,8 @@ print(f"Çıktılar '{run_dir}' klasörüne kaydedilecek.\n")
 # ===============================
 # 1. VERİYİ YÜKLE
 # ===============================
-csv_path = r"C:/Users/Admin/.cache/kagglehub/datasets/ericanacletoribeiro/cicids2017-cleaned-and-preprocessed/versions/6/cicids2017_cleaned.csv"
+csv_path = (r"C:\Users\Admin\.cache\kagglehub\datasets\ericanacletoribeiro\cicids2017-cleaned-and-preprocessed"
+            r"\versions\6\cicids2017_cleaned.csv")
 df = pd.read_csv(csv_path)
 
 df.replace([np.inf, -np.inf], np.nan, inplace=True)
@@ -67,7 +68,7 @@ X_test = scaler.transform(X_test).astype(np.float32)
 # 5. LINEAR SVM (SGD) - CPU
 # ===============================
 model = SGDClassifier(
-    loss="hinge",             # Linear SVM
+    loss="hinge",  # Linear SVM
     penalty="l2",
     alpha=1e-4,
     max_iter=20,
